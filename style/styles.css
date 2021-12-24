@@ -1,0 +1,20 @@
+@font-face {
+    font-family: Anton;
+    src: url("../assets/fonts/Anton-Regular.ttf");
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: Anton;
+}
+
+body{
+    background-color: rgba(230, 230, 230, 0.5);
+}
+
+input{
+    position: relative;
+    top: 10px;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
