@@ -14,6 +14,13 @@ function datetimeToDay(datetime){
 
 function searchWeather(event){
     event.preventDefault();
+    var render = document.getElementById("render");
+    var e = render.lastElementChild;
+    while(e){
+        render.removeChild(e);
+        e = render.lastElementChild;
+    }
+
     const city = document.getElementById("city-title").value;
     const url = apiUrl + city;
     fetch(url)
@@ -53,6 +60,7 @@ function handleData(data){
                 clouds: element.clouds.all
             });
         }
+        i += 1;
     });
     
     render(todayData, realData, cityName);
@@ -60,5 +68,32 @@ function handleData(data){
 
 function render(todayData, weekData, cityName){
     document.getElementById("city").innerText = cityName;
-    console.log(todayData);
+    console.log(weekData);
+    let parentDiv = document.getElementById("render");
+    weekData.forEach(element => {
+        let div = document.createElement("div");
+        div.className = "row my-2";
+        
+        let title = document.createElement("h4");
+        title.innerText = element.date;
+        title.className = "col-3 fw-light"
+        div.appendChild(title);
+
+        let temp = document.createElement("p");
+        temp.innerText = element.temp + "°C";
+        temp.className = "col-3 fw-bold"
+        div.appendChild(temp);
+
+        let pressure = document.createElement("p");
+        pressure.innerText = "Pressure : " + element.pressure;
+        pressure.className = "col-3"
+        div.appendChild(pressure);
+
+        let clouds = document.createElement("p");
+        clouds.innerText = element.clouds + "%";
+        clouds.className = "col-3"
+        div.appendChild(clouds);
+
+        parentDiv.appendChild(div);
+    })
 }
